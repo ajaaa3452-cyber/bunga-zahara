@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bunga Mekar untuk Zaharaa 🌸</title>
+  <style>
+    body {
+      background: linear-gradient(to top, #ffe6f2, #ffffff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+    }
+
+    /* Tombol klik */
+    button {
+      background-color: hotpink;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1.3em;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 15px pink;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 10;
+    }
+
+    button:hover {
+      background-color: deeppink;
+      transform: scale(1.05);
+    }
+
+    /* Kontainer bunga */
+    .flower-container {
+      display: none;
+      align-items: center;
+      flex-direction: column;
+      position: relative;
+      justify-content: center;
+      height: 80vh;
+      animation: riseUp 2s ease-out forwards;
+    }
+
+    @keyframes riseUp {
+      from { transform: translateY(200px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .stem {
+      width: 6px;
+      height: 0;
+      background: #2ecc71;
+      border-radius: 3px;
+      animation: growStem 2s ease-out forwards;
+      transform-origin: bottom;
+    }
+
+    @keyframes growStem {
+      from { height: 0; }
+      to { height: 160px; }
+    }
+
+    .flower {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      opacity: 0;
+      transform: scale(0);
+      margin-bottom: -10px;
+      animation: bloom 3s ease-out 2s forwards;
+    }
+
+    .petal {
+      position: absolute;
+      width: 50px;
+      height: 80px;
+      background: pink;
+      border-radius: 50%;
+      top: 10px;
+      left: 25px;
+      transform-origin: bottom center;
+      box-shadow: 0 0 10px rgba(255,105,180,0.5);
+    }
+
+    .petal:nth-child(1) { transform: rotate(0deg); }
+    .petal:nth-child(2) { transform: rotate(60deg); }
+    .petal:nth-child(3) { transform: rotate(120deg); }
+    .petal:nth-child(4) { transform: rotate(180deg); }
+    .petal:nth-child(5) { transform: rotate(240deg); }
+    .petal:nth-child(6) { transform: rotate(300deg); }
+
+    .center {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: yellow;
+      border-radius: 50%;
+      top: 30px;
+      left: 30px;
+      box-shadow: 0 0 20px gold;
+    }
+
+    @keyframes bloom {
+      0% { transform: scale(0); opacity: 0; }
+      60% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Tulisan cinta di tengah layar */
+    h1 {
+      color: hotpink;
+      font-size: 2.6em;
+      text-shadow: 0 0 10px pink;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.8);
+      animation: fadeIn 2s ease-in 5s forwards;
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+      to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+
+    /* Responsiveness tweaks */
+    @media (max-width: 420px) {
+      h1 { font-size: 1.8em; }
+      .flower { width: 80px; height: 80px; }
+      .petal { width: 40px; height: 64px; left: 20px; top: 8px; }
+      .center { width: 34px; height: 34px; top: 26px; left: 23px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Tombol di tengah -->
+  <button id="showFlower">🌸 Klik di sini untuk lihat bunga 🌸</button>
+
+  <!-- Kontainer bunga -->
+  <div class="flower-container" id="flowerContainer" aria-hidden="true">
+    <div class="stem" id="stem" aria-hidden="true"></div>
+    <div class="flower" id="flower" aria-hidden="true">
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="petal"></div>
+      <div class="center"></div>
+    </div>
+    <h1 id="loveText" aria-hidden="true">I LOVEE YOUU ZAHARAAA 💖</h1>
+  </div>
+
+  <script>
+    const button = document.getElementById('showFlower');
+    const flowerContainer = document.getElementById('flowerContainer');
+    const loveText = document.getElementById('loveText');
+
+    button.addEventListener('click', () => {
+      button.style.display = 'none';
+      flowerContainer.style.display = 'flex';
+      flowerContainer.setAttribute('aria-hidden', 'false');
+      loveText.setAttribute('aria-hidden', 'false');
+    });
+
+    // Accessibility: allow Enter/Space to trigger
+    button.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') button.click();
+    });
+  </script>
+
+</body>
+</html>
